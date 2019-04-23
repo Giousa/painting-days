@@ -44,7 +44,7 @@ public class PaintingsController {
 
             for (MultipartFile mf : file) {
                 if(!mf.isEmpty()){
-                    String pic = UploadOSSUtils.uploadSinglePic(mf,username);
+                    String pic = UploadOSSUtils.uploadSinglePic(mf,username+"/");
                     sb.append(pic+",");
                 }
             }
@@ -114,7 +114,7 @@ public class PaintingsController {
 
                 for (MultipartFile mf : file) {
                     if (!mf.isEmpty()) {
-                        String pic = UploadOSSUtils.uploadSinglePic(mf, username);
+                        String pic = UploadOSSUtils.uploadSinglePic(mf, username+"/");
                         sb.append(pic + ",");
                     }
                 }
