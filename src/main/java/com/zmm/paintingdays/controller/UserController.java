@@ -28,8 +28,8 @@ public class UserController {
     private UserService userService;
 
 
+//    @CrossOrigin
     @PostMapping(value = "/register")
-    @CrossOrigin
     public ResultVO register(@RequestParam("username")String username, @RequestParam("password")String password, @RequestParam("verifyCode")String verifyCode, HttpServletRequest request){
 
         return userService.register(username, password,verifyCode,request);
@@ -37,14 +37,12 @@ public class UserController {
 
 
     @PostMapping(value = "/login")
-    @CrossOrigin
     public ResultVO login(@RequestParam("username")String username, @RequestParam("password")String password){
 
         return userService.login(username, password);
     }
 
     @GetMapping(value = {"/deleteUserById/{id}","/deleteUserById"})
-    @CrossOrigin
     public ResultVO deleteUserById(@PathVariable(value = "id",required = false)String id){
 
         return userService.delete(id);
@@ -52,7 +50,6 @@ public class UserController {
 
 
     @PostMapping(value = "/updateUser")
-    @CrossOrigin
     public ResultVO updateUser(@RequestBody User user, BindingResult bindingResult){
 
         if(bindingResult.hasErrors()){
@@ -64,7 +61,6 @@ public class UserController {
     }
 
     @GetMapping(value = {"/findUserById/{id}","/findUserById"})
-    @CrossOrigin
     public ResultVO findUserById(@PathVariable(value = "id",required = false)String id){
 
 
@@ -72,7 +68,6 @@ public class UserController {
     }
 
     @PostMapping(value = "/resetPassword")
-    @CrossOrigin
     public ResultVO resetPassword(@RequestParam("username")String username,
                                   @RequestParam("newPassword")String newPassword,
                                   @RequestParam("verifyCode")String verifyCode,
@@ -83,7 +78,6 @@ public class UserController {
 
 
     @PostMapping(value = "/modifyPassword")
-    @CrossOrigin
     public ResultVO modifyPassword(@RequestParam("username")String username,
                                    @RequestParam("oldPassword")String oldPassword,
                                    @RequestParam("newPassword")String newPassword){
@@ -93,7 +87,6 @@ public class UserController {
 
 
     @PostMapping(value = "/modifyUsername")
-    @CrossOrigin
     public ResultVO modifyUsername(@RequestParam("id")String id,
                                    @RequestParam("newUsername")String newUsername){
 
@@ -117,7 +110,6 @@ public class UserController {
 //    }
 
     @PostMapping(value = "/uploadIcon")
-    @CrossOrigin
     public ResultVO uploadIcon(@RequestParam("id") String id,
                                @RequestParam("username") String username,
                                @RequestParam(value="uploadFile",required=false) MultipartFile file){
@@ -142,7 +134,6 @@ public class UserController {
 
 
     @PostMapping(value = {"/getVerifyCode"})
-    @CrossOrigin
     public ResultVO getVerifyCode(@RequestParam(value = "username",required = false)String username,
                                   HttpServletRequest request, HttpServletResponse response){
 

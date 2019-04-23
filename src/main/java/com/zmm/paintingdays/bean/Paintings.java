@@ -40,6 +40,8 @@ public class Paintings {
 
     private int likes;//点赞数
 
+    private boolean jurisdiction;//权限
+
     @CreatedDate
     private Date createTime;
 
