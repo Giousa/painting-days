@@ -21,10 +21,10 @@ public class UploadOSSUtils {
 		// 创建OSSClient实例
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		// 上传文件流
-		ossClient.putObject(bucketName, fileName+picId+".jpg", file.getInputStream());
+		ossClient.putObject(bucketName, fileName+"/"+picId+".jpg", file.getInputStream());
 		// 关闭client
 		ossClient.shutdown();
-		String path = picAddressHead+fileName+picId+".jpg";
+		String path = picAddressHead+fileName+"/"+picId+".jpg";
 
 		return path;
 	}

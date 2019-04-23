@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/user")
+@CrossOrigin
 public class UserController {
 
     @Autowired
@@ -120,7 +121,7 @@ public class UserController {
                 return ResultVO.error(ResultEnum.PARAM_ERROR);
             }
 
-            String path = UploadOSSUtils.uploadSinglePic(file,username+"/");
+            String path = UploadOSSUtils.uploadSinglePic(file,username);
 
             return userService.uploadIcon(id,path);
 

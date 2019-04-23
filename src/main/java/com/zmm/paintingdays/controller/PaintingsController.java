@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @RestController
 @RequestMapping("/paintings")
+@CrossOrigin
 public class PaintingsController {
 
     @Autowired
@@ -44,7 +45,7 @@ public class PaintingsController {
 
             for (MultipartFile mf : file) {
                 if(!mf.isEmpty()){
-                    String pic = UploadOSSUtils.uploadSinglePic(mf,username+"/");
+                    String pic = UploadOSSUtils.uploadSinglePic(mf,username);
                     sb.append(pic+",");
                 }
             }
@@ -114,7 +115,7 @@ public class PaintingsController {
 
                 for (MultipartFile mf : file) {
                     if (!mf.isEmpty()) {
-                        String pic = UploadOSSUtils.uploadSinglePic(mf, username+"/");
+                        String pic = UploadOSSUtils.uploadSinglePic(mf, username);
                         sb.append(pic + ",");
                     }
                 }
