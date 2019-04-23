@@ -33,7 +33,35 @@ public class PaintingsController {
                                  @RequestParam(value = "content",required = false)String content,
                                  @RequestParam(value = "tags",required = false)String tags,
                                  @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
-                                 @RequestParam(value="uploadFiles",required=false) MultipartFile[] file){
+                                 @RequestParam(value = "uploadFile",required = false) MultipartFile file){
+
+        if(StringUtils.isEmpty(uId) || StringUtils.isEmpty(username) || file == null){
+            return ResultVO.error(ResultEnum.PARAM_ERROR);
+        }
+
+        try {
+
+            String pic = UploadOSSUtils.uploadSinglePic(file,username);
+
+            return paintingsService.addPaintings(uId,title,content,tags,jurisdiction,pic);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResultVO.error(ResultEnum.PIC_UPLOAD_FAILURE);
+
+        }
+
+    }
+
+
+    @PostMapping(value = "/addMultyPaintings")
+    public ResultVO addMultyPaintings(@RequestParam("uId")String uId,
+                                 @RequestParam("username")String username,
+                                 @RequestParam(value = "title",required = false)String title,
+                                 @RequestParam(value = "content",required = false)String content,
+                                 @RequestParam(value = "tags",required = false)String tags,
+                                 @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
+                                 @RequestParam(value = "uploadFiles",required=false) MultipartFile[] file){
 
         if(StringUtils.isEmpty(username) || file == null){
             return ResultVO.error(ResultEnum.PARAM_ERROR);
@@ -65,32 +93,6 @@ public class PaintingsController {
 
     }
 
-//    @PostMapping(value = "/addPaintings")
-//    public ResultVO addP(@RequestParam("uId")String uId,
-//                            @RequestParam("username")String username,
-//                            @RequestParam(value = "title",required = false)String title,
-//                            @RequestParam(value = "content",required = false)String content,
-//                            @RequestParam(value = "tags",required = false)String tags,
-//                            @RequestParam(value="uploadFile",required=false) MultipartFile file){
-//
-//
-//        if(StringUtils.isEmpty(uId) || StringUtils.isEmpty(username)){
-//            return ResultVO.error(ResultEnum.PARAM_ERROR);
-//        }
-//
-//        try {
-//
-//            String pics = UploadOSSUtils.uploadSinglePic(file,username+"/");
-//
-//            return paintingsService.addPaintings(uId,username,title,content,tags,pics);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return ResultVO.error(ResultEnum.PIC_UPLOAD_FAILURE);
-//
-//        }
-//    }
-
 
     @PostMapping(value = "/updatePaintings")
     public ResultVO updatePaintings(@RequestParam("id")String id,
@@ -99,9 +101,52 @@ public class PaintingsController {
                                     @RequestParam(value = "title",required = false)String title,
                                     @RequestParam(value = "content",required = false)String content,
                                     @RequestParam(value = "tags",required = false)String tags,
+                                    @RequestParam(value = "pic",required = false)String pic,
+                                    @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
+                                    @RequestParam(value = "uploadFile",required = false) MultipartFile file) {
+
+        if (StringUtils.isEmpty(id)|| StringUtils.isEmpty(uId) || StringUtils.isEmpty(username)) {
+            return ResultVO.error(ResultEnum.PARAM_ERROR);
+        }
+
+        if(file != null){
+
+            try {
+
+                String picPath = UploadOSSUtils.uploadSinglePic(file,username);
+
+                return paintingsService.updatePaintings(id,uId,title,content,tags,jurisdiction,picPath);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                return ResultVO.error(ResultEnum.PIC_UPLOAD_FAILURE);
+
+            }
+
+        }else {
+
+            //当没有新上传图片时，原来的图片地址需要传入
+            if(StringUtils.isEmpty(pic)){
+                return ResultVO.error(ResultEnum.PARAM_ERROR);
+            }
+
+            return paintingsService.updatePaintings(id,uId, title, content, tags,jurisdiction, pic);
+
+        }
+
+
+    }
+
+    @PostMapping(value = "/updateMultyPaintings")
+    public ResultVO updateMultyPaintings(@RequestParam("id")String id,
+                                    @RequestParam("uId")String uId,
+                                    @RequestParam("username")String username,
+                                    @RequestParam(value = "title",required = false)String title,
+                                    @RequestParam(value = "content",required = false)String content,
+                                    @RequestParam(value = "tags",required = false)String tags,
                                     @RequestParam(value = "pics",required = false)String pics,
                                     @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
-                                    @RequestParam(value="uploadFiles",required=false) MultipartFile[] file) {
+                                    @RequestParam(value = "uploadFiles",required=false) MultipartFile[] file) {
 
         if (StringUtils.isEmpty(id)|| StringUtils.isEmpty(uId) || StringUtils.isEmpty(username)) {
             return ResultVO.error(ResultEnum.PARAM_ERROR);
@@ -123,7 +168,7 @@ public class PaintingsController {
                 String pics2 = sb.toString();
                 if (!StringUtils.isEmpty(pics2)) {
                     pics2 = pics2.substring(0, pics2.length() - 1);
-                    return paintingsService.updatePaintings(id,uId, title, content, tags, jurisdiction,pics2);
+                    return paintingsService.updateMultyPaintings(id,uId, title, content, tags, jurisdiction,pics2);
                 } else {
                     return ResultVO.error(ResultEnum.PIC_UPLOAD_FAILURE);
                 }
@@ -141,7 +186,7 @@ public class PaintingsController {
                 return ResultVO.error(ResultEnum.PARAM_ERROR);
             }
 
-            return paintingsService.updatePaintings(id,uId, title, content, tags,jurisdiction, pics);
+            return paintingsService.updateMultyPaintings(id,uId, title, content, tags,jurisdiction, pics);
 
         }
 

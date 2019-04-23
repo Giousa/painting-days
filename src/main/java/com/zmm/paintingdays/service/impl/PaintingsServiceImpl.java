@@ -45,6 +45,24 @@ public class PaintingsServiceImpl implements PaintingsService {
     }
 
     @Override
+    public ResultVO addMultyPaintings(String uId, String title, String content, String tags, boolean jurisdiction, String pics) {
+        if(StringUtils.isEmpty(uId)|| StringUtils.isEmpty(pics)){
+            return ResultVO.error(ResultEnum.PARAM_ERROR);
+        }
+
+        Paintings paintings = new Paintings();
+        paintings.setId(KeyUtil.getKeyId());
+        paintings.setUId(uId);
+        paintings.setTitle(title);
+        paintings.setContent(content);
+        paintings.setTags(tags);
+        paintings.setPics(pics);
+        paintings.setJurisdiction(jurisdiction);
+
+        return ResultVO.ok(paintingsRepository.save(paintings));
+    }
+
+    @Override
     public ResultVO deletePaintings(String id) {
 
         if(StringUtils.isEmpty(id)){
@@ -59,6 +77,23 @@ public class PaintingsServiceImpl implements PaintingsService {
     @Override
     public ResultVO updatePaintings(String id, String uId, String title, String content, String tags,boolean jurisdiction, String pics) {
 
+        Optional<Paintings> byId = paintingsRepository.findById(id);
+        if(byId.isPresent()){
+            Paintings paintings = byId.get();
+            paintings.setUId(uId);
+            paintings.setTitle(title);
+            paintings.setContent(content);
+            paintings.setTags(tags);
+            paintings.setPics(pics);
+            paintings.setJurisdiction(jurisdiction);
+            return ResultVO.ok(paintingsRepository.save(paintings));
+        }
+
+        return ResultVO.error(ResultEnum.PAINTINGS_NOT_EXIST);
+    }
+
+    @Override
+    public ResultVO updateMultyPaintings(String id, String uId, String title, String content, String tags, boolean jurisdiction, String pics) {
         Optional<Paintings> byId = paintingsRepository.findById(id);
         if(byId.isPresent()){
             Paintings paintings = byId.get();

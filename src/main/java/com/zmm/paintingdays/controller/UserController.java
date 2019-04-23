@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
+@CrossOrigin(origins="*",maxAge = 3600)
 public class UserController {
 
     @Autowired
@@ -31,14 +31,17 @@ public class UserController {
 
 //    @CrossOrigin
     @PostMapping(value = "/register")
-    public ResultVO register(@RequestParam("username")String username, @RequestParam("password")String password, @RequestParam("verifyCode")String verifyCode, HttpServletRequest request){
+    public ResultVO register(@RequestParam("username")String username,
+                             @RequestParam("password")String password,
+                             @RequestParam("verifyCode")String verifyCode, HttpServletRequest request){
 
         return userService.register(username, password,verifyCode,request);
     }
 
 
     @PostMapping(value = "/login")
-    public ResultVO login(@RequestParam("username")String username, @RequestParam("password")String password){
+    public ResultVO login(@RequestParam("username")String username,
+                          @RequestParam("password")String password){
 
         return userService.login(username, password);
     }

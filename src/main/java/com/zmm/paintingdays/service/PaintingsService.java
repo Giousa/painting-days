@@ -11,11 +11,15 @@ import org.springframework.data.domain.Pageable;
  */
 public interface PaintingsService {
 
-    ResultVO addPaintings(String uId,String title,String content, String tags,boolean jurisdiction,String pics);
+    ResultVO addPaintings(String uId,String title,String content, String tags,boolean jurisdiction,String pic);
+
+    ResultVO addMultyPaintings(String uId,String title,String content, String tags,boolean jurisdiction,String pics);
 
     ResultVO deletePaintings(String id);
 
-    ResultVO updatePaintings(String id,String uId,String title,String content, String tags,boolean jurisdiction,String pics);
+    ResultVO updatePaintings(String id,String uId,String title,String content, String tags,boolean jurisdiction,String pic);
+
+    ResultVO updateMultyPaintings(String id,String uId,String title,String content, String tags,boolean jurisdiction,String pics);
 
     ResultVO findPaintingsById(String id);
 
