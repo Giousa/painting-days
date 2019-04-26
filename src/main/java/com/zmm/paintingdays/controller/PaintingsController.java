@@ -168,7 +168,7 @@ public class PaintingsController {
                 String pics2 = sb.toString();
                 if (!StringUtils.isEmpty(pics2)) {
                     pics2 = pics2.substring(0, pics2.length() - 1);
-                    return paintingsService.updateMultyPaintings(id,uId, title, content, tags, jurisdiction,pics2);
+                    return paintingsService.updatePaintings(id,uId, title, content, tags, jurisdiction,pics2);
                 } else {
                     return ResultVO.error(ResultEnum.PIC_UPLOAD_FAILURE);
                 }
@@ -186,7 +186,7 @@ public class PaintingsController {
                 return ResultVO.error(ResultEnum.PARAM_ERROR);
             }
 
-            return paintingsService.updateMultyPaintings(id,uId, title, content, tags,jurisdiction, pics);
+            return paintingsService.updatePaintings(id,uId, title, content, tags,jurisdiction, pics);
 
         }
 
@@ -207,8 +207,8 @@ public class PaintingsController {
 
     @GetMapping(value = "/findAllPaintingsByUid")
     public ResultVO findAllPaintingsByUid(@RequestParam(value = "uId",required = false)String uId,
-                                          @RequestParam(value = "page",defaultValue = "0") Integer page,
-                                          @RequestParam(value = "size",defaultValue = "10") Integer size){
+                                          @RequestParam(value = "page",defaultValue = "0") int page,
+                                          @RequestParam(value = "size",defaultValue = "10") int size){
 
         return paintingsService.findAllPaintingsByUid(uId,new PageRequest(page, size, Sort.Direction.DESC,"updateTime"));
     }

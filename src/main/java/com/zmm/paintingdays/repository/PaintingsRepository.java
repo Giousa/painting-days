@@ -1,6 +1,7 @@
 package com.zmm.paintingdays.repository;
 
 import com.zmm.paintingdays.bean.Paintings;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -14,6 +15,6 @@ import java.util.List;
 public interface PaintingsRepository extends JpaRepository<Paintings,String> {
 
 
-    List<Paintings> findAllByUId(String uId);
+    List<Paintings> findAllByUId(String uId, Pageable pageable);
 
 }
