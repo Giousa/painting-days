@@ -32,7 +32,7 @@ public class PaintingsController {
                                  @RequestParam(value = "title",required = false)String title,
                                  @RequestParam(value = "content",required = false)String content,
                                  @RequestParam(value = "tags",required = false)String tags,
-                                 @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
+                                 @RequestParam(value = "jurisdiction",required = false)int jurisdiction,
                                  @RequestParam(value = "uploadFile",required = false) MultipartFile file){
 
         if(StringUtils.isEmpty(uId) || StringUtils.isEmpty(username) || file == null){
@@ -60,7 +60,7 @@ public class PaintingsController {
                                  @RequestParam(value = "title",required = false)String title,
                                  @RequestParam(value = "content",required = false)String content,
                                  @RequestParam(value = "tags",required = false)String tags,
-                                 @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
+                                 @RequestParam(value = "jurisdiction",required = false)int jurisdiction,
                                  @RequestParam(value = "uploadFiles",required=false) MultipartFile[] file){
 
         if(StringUtils.isEmpty(username) || file == null){
@@ -102,7 +102,7 @@ public class PaintingsController {
                                     @RequestParam(value = "content",required = false)String content,
                                     @RequestParam(value = "tags",required = false)String tags,
                                     @RequestParam(value = "pic",required = false)String pic,
-                                    @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
+                                    @RequestParam(value = "jurisdiction",required = false)int jurisdiction,
                                     @RequestParam(value = "uploadFile",required = false) MultipartFile file) {
 
         if (StringUtils.isEmpty(id)|| StringUtils.isEmpty(uId) || StringUtils.isEmpty(username)) {
@@ -145,7 +145,7 @@ public class PaintingsController {
                                     @RequestParam(value = "content",required = false)String content,
                                     @RequestParam(value = "tags",required = false)String tags,
                                     @RequestParam(value = "pics",required = false)String pics,
-                                    @RequestParam(value = "jurisdiction",required = false)boolean jurisdiction,
+                                    @RequestParam(value = "jurisdiction",required = false)int jurisdiction,
                                     @RequestParam(value = "uploadFiles",required=false) MultipartFile[] file) {
 
         if (StringUtils.isEmpty(id)|| StringUtils.isEmpty(uId) || StringUtils.isEmpty(username)) {

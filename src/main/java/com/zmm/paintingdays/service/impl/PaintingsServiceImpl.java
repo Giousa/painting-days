@@ -27,7 +27,7 @@ public class PaintingsServiceImpl implements PaintingsService {
     private PaintingsRepository paintingsRepository;
 
     @Override
-    public ResultVO addPaintings(String uId,String title, String content, String tags,boolean jurisdiction, String pics) {
+    public ResultVO addPaintings(String uId,String title, String content, String tags,int jurisdiction, String pics) {
         if(StringUtils.isEmpty(uId)|| StringUtils.isEmpty(pics)){
             return ResultVO.error(ResultEnum.PARAM_ERROR);
         }
@@ -75,7 +75,7 @@ public class PaintingsServiceImpl implements PaintingsService {
     }
 
     @Override
-    public ResultVO updatePaintings(String id, String uId, String title, String content, String tags,boolean jurisdiction, String pics) {
+    public ResultVO updatePaintings(String id, String uId, String title, String content, String tags,int jurisdiction, String pics) {
 
         Optional<Paintings> byId = paintingsRepository.findById(id);
         if(byId.isPresent()){
