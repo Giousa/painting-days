@@ -49,7 +49,9 @@ public enum ResultEnum {
 
     COMMENT_REPLY_FAILURE(218,"回复失败"),
 
-    PAINTINGS_NOT_EXIST(219,"绘画作品不存在")
+    PAINTINGS_NOT_EXIST(219,"绘画作品不存在"),
+
+    DIARYS_NOT_EXIST(220,"日记不存在")
 
     ;
 

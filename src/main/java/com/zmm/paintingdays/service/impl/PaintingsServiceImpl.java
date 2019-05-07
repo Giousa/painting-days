@@ -68,6 +68,11 @@ public class PaintingsServiceImpl implements PaintingsService {
         if(StringUtils.isEmpty(id)){
             return ResultVO.error(ResultEnum.PARAM_ERROR);
         }
+        Optional<Paintings> optionalPaintings = paintingsRepository.findById(id);
+
+        if(!optionalPaintings.isPresent()){
+            return ResultVO.error(ResultEnum.PAINTINGS_NOT_EXIST);
+        }
 
         paintingsRepository.deleteById(id);
 
