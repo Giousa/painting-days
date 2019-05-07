@@ -4,8 +4,6 @@ import com.zmm.paintingdays.bean.Diary;
 import com.zmm.paintingdays.bean.ResultVO;
 import org.springframework.data.domain.Pageable;
 
-import java.util.Date;
-
 /**
  * Description:
  * Author:zhangmengmeng
@@ -14,7 +12,7 @@ import java.util.Date;
  */
 public interface DiaryService {
 
-    ResultVO addDiary(String title, String content, Date createTime);
+    ResultVO addDiary(String uId,String title, String content, String createTime);
 
     ResultVO updateDiary(Diary diary);
 

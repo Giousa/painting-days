@@ -5,13 +5,13 @@ import com.zmm.paintingdays.bean.ResultVO;
 import com.zmm.paintingdays.enums.ResultEnum;
 import com.zmm.paintingdays.repository.DiaryRepository;
 import com.zmm.paintingdays.service.DiaryService;
+import com.zmm.paintingdays.utils.DateUtils;
 import com.zmm.paintingdays.utils.KeyUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,17 +28,18 @@ public class DiaryServiceImpl implements DiaryService {
     private DiaryRepository diaryRepository;
 
     @Override
-    public ResultVO addDiary(String title, String content, Date createTime) {
+    public ResultVO addDiary(String uId,String title, String content, String createTime) {
 
-        if(StringUtils.isEmpty(title)|| StringUtils.isEmpty(content)){
+        if(StringUtils.isEmpty(uId)||StringUtils.isEmpty(title)|| StringUtils.isEmpty(content)){
             return ResultVO.error(ResultEnum.PARAM_ERROR);
         }
 
         Diary diary = new Diary();
         diary.setId(KeyUtil.getKeyId());
+        diary.setUId(uId);
         diary.setTitle(title);
         diary.setContent(content);
-        diary.setCreateTime(createTime);
+        diary.setCreateTime(DateUtils.stringToDate(createTime,"yyyy-MM-dd HH:mm:ss"));
 
         return ResultVO.ok(diaryRepository.save(diary));
     }

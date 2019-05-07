@@ -8,8 +8,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-
 /**
  * Description:
  * Author:zhangmengmeng
@@ -26,11 +24,12 @@ public class DiaryController{
 
 
     @GetMapping(value = "/addDiary")
-    public ResultVO addDiary(@RequestParam("title")String title,
+    public ResultVO addDiary(@RequestParam("uId")String uId,
+                             @RequestParam("title")String title,
                              @RequestParam("content")String content,
-                             @RequestParam("createTime")Date createTime) {
+                             @RequestParam(value = "createTime",required = false)String createTime) {
 
-        return diaryService.addDiary(title,content,createTime);
+        return diaryService.addDiary(uId,title,content,createTime);
     }
 
     @GetMapping(value = "/updateDiary")
