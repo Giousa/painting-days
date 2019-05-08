@@ -32,7 +32,7 @@ public class DiaryController{
         return diaryService.addDiary(uId,title,content,createTime);
     }
 
-    @GetMapping(value = "/updateDiary")
+    @PostMapping(value = "/updateDiary")
     public ResultVO updateDiary(@RequestBody Diary diary) {
         return diaryService.updateDiary(diary);
     }

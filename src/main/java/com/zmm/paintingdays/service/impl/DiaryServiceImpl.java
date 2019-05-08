@@ -46,7 +46,7 @@ public class DiaryServiceImpl implements DiaryService {
 
     @Override
     public ResultVO updateDiary(Diary diary) {
-
+        System.out.println("diary = "+diary.toString());
         return ResultVO.ok(diaryRepository.save(diary));
     }
 

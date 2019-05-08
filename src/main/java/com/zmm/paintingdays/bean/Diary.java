@@ -1,5 +1,6 @@
 package com.zmm.paintingdays.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
@@ -40,6 +41,7 @@ public class Diary {
     @JsonIgnore
     private int active;
 
+    @JsonFormat( pattern="yyyy-MM-dd")
     private Date createTime;
 
     @JsonIgnore
