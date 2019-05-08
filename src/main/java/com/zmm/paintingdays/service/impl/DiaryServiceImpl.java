@@ -39,7 +39,7 @@ public class DiaryServiceImpl implements DiaryService {
         diary.setUId(uId);
         diary.setTitle(title);
         diary.setContent(content);
-        diary.setCreateTime(DateUtils.stringToDate(createTime,"yyyy-MM-dd HH:mm:ss"));
+        diary.setCreateTime(DateUtils.stringToDate(createTime,"yyyy-MM-dd"));
 
         return ResultVO.ok(diaryRepository.save(diary));
     }
