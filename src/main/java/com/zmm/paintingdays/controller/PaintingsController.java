@@ -210,6 +210,21 @@ public class PaintingsController {
                                           @RequestParam(value = "page",defaultValue = "0") int page,
                                           @RequestParam(value = "size",defaultValue = "10") int size){
 
-        return paintingsService.findAllPaintingsByUid(uId,new PageRequest(page, size, Sort.Direction.DESC,"updateTime"));
+        return paintingsService.findAllPaintingsByUid(uId,new PageRequest(page, size, Sort.Direction.DESC,"create_time"));
+    }
+
+    @GetMapping(value = "/findTodayPaintingsByUid")
+    public ResultVO findTodayPaintingsByUid(@RequestParam(value = "uId",required = false)String uId,
+                                            @RequestParam(value = "page",defaultValue = "0") int page,
+                                            @RequestParam(value = "size",defaultValue = "10") int size){
+
+        return paintingsService.findTodayPaintingsByUid(uId,new PageRequest(page, size, Sort.Direction.DESC,"create_time"));
+    }
+
+    @GetMapping(value = "/findPaintingsByCreateTime")
+    public ResultVO findPaintingsByCreateTime(@RequestParam(value = "uId",required = false)String uId,
+                                              @RequestParam(value = "createTime",required = false)String createTime){
+
+        return paintingsService.findPaintingsByCreateTime(uId,createTime);
     }
 }

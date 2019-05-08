@@ -24,4 +24,8 @@ public interface PaintingsService {
     ResultVO findPaintingsById(String id);
 
     ResultVO findAllPaintingsByUid(String uId, Pageable pageable);
+
+    ResultVO findTodayPaintingsByUid(String uId, Pageable pageable);
+
+    ResultVO findPaintingsByCreateTime(String uId, String createTime);
 }

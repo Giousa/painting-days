@@ -142,4 +142,26 @@ public class PaintingsServiceImpl implements PaintingsService {
 
         return ResultVO.ok(paintingsList);
     }
+
+    @Override
+    public ResultVO findTodayPaintingsByUid(String uId, Pageable pageable) {
+
+        if(StringUtils.isEmpty(uId)){
+            return ResultVO.error(ResultEnum.PARAM_ERROR);
+        }
+
+        List<Paintings>  paintingsList = paintingsRepository.findTodayPaintingsByUid(uId, pageable);
+        return ResultVO.ok(paintingsList);
+    }
+
+    @Override
+    public ResultVO findPaintingsByCreateTime(String uId, String createTime) {
+
+        if(StringUtils.isEmpty(uId)){
+            return ResultVO.error(ResultEnum.PARAM_ERROR);
+        }
+
+        List<Paintings> paintingsList = paintingsRepository.findPaintingsByCreateTime(createTime, uId);
+        return ResultVO.ok(paintingsList);
+    }
 }
