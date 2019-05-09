@@ -21,6 +21,6 @@ public interface PaintingsRepository extends JpaRepository<Paintings,String> {
     @Query(value = "SELECT * FROM painting_days.p_paintings where to_days(create_time)=to_days(now()) and u_id=?", nativeQuery = true)
     List<Paintings> findTodayPaintingsByUid(String userId,Pageable pageable);
 
-    @Query(value = "SELECT * FROM painting_days.p_paintings where to_days(create_time)=to_days(?) and u_id=?", nativeQuery = true)
+    @Query(value = "SELECT * FROM painting_days.p_paintings where to_days(create_time)=to_days(?) and u_id=? order by create_time desc", nativeQuery = true)
     List<Paintings> findPaintingsByCreateTime(String createTime,String userId);
 }
